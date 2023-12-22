@@ -1,0 +1,85 @@
+<!-- app.component.html -->
+
+<main>
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <h3 class="text-center">Ajout d'un nouveau contact</h3>
+      <form #contactForm="ngForm" (submit)="onSubmit()">
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <label for="firstName" class="form-label">Prénom</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" #firstName="ngModel" [(ngModel)]="contact.firstName" placeholder="Sarah" required>
+            <!-- Error message for required field -->
+            <div [hidden]="firstName.valid || firstName.pristine" class="alert alert-danger">
+              Le champ prénom est requis
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="lastName" class="form-label">Nom :</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" #lastName="ngModel" [(ngModel)]="contact.lastName" placeholder="Hamami" required>
+            <!-- Error message for required field -->
+            <div [hidden]="lastName.valid || lastName.pristine" class="alert alert-danger">
+              Le champ nom est requis
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="phone" class="form-label">Téléphone :</label>
+            <input type="text" class="form-control" id="phone" name="phone" #phone="ngModel" [(ngModel)]="contact.phone" placeholder="98000000" required>
+            <!-- Error message for required field -->
+            <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">
+              Le champ téléphone est requis
+            </div>
+          </div>
+          <div class="col-6">
+            <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+            <input type="email" class="form-control" id="email" name="email" #email="ngModel" [(ngModel)]="contact.email" placeholder="you@example.com">
+          </div>
+          <div class="col-6">
+            <label for="description" class="form-label">Description</label>
+            <input type="text" class="form-control" id="description" name="description" #description="ngModel" [(ngModel)]="contact.description" placeholder="My daughter">
+          </div>
+          <div class="col-md-5">
+            <label for="type" class="form-label">Type</label>
+            <select class="form-select" id="type" name="type" #type="ngModel" [(ngModel)]="contact.type" required>
+              <option value="Friend">Ami</option>
+              <option value="Work">Travail</option>
+              <option value="Family">Famille</option>
+            </select>
+            <!-- Error message for required field -->
+            <div [hidden]="type.valid || type.pristine" class="alert alert-danger">
+              Le champ type est requis
+            </div>
+          </div>
+          <hr class="my-4">
+          <button class="w-30 btn btn-primary btn-lg" type="submit" style="max-width:200px">Ajouter</button>
+        </div>
+      </form>
+
+      <!-- Display contacts in a table -->
+      <div class="row row-cols-1 mb-1 text-center mt-4">
+        <table class="table" border="=1">
+          <thead>
+            <tr>
+              <th scope="col">Nom</th>
+              <th scope="col">Prénom</th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
+              <th scope="col">Description</th>
+              <th scope="col">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of listContacts" >
+              <td>{{ item.lastName }}</td>
+              <td>{{ item.firstName }}</td>
+              <td>{{ item.phone }}</td>
+              <td>{{ item.email }}</td>
+              <td>{{ item.description }}</td>
+              <td>{{ item.type }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
